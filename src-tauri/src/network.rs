@@ -28,3 +28,19 @@ pub(crate) fn get_dns() -> String {
     let dns_servers = String::from_utf8(output.stdout).unwrap().trim().to_string();
     return dns_servers;
 }
+
+pub(crate) fn set_dns(servers: Vec<String>) -> std::io::Result<()> {
+
+  let mut cmd = Command::new("networksetup");
+
+  cmd.arg("-setdnsservers")
+     .arg("Wi-Fi"); // 修改的网络接口
+
+  for server in servers {
+    cmd.arg(server); 
+  }
+
+  cmd.output()?;
+  
+  Ok(())
+}

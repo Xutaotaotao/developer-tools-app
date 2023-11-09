@@ -4,6 +4,8 @@
 mod compress_image;
 mod network;
 
+use tauri::InvokeError;
+
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
 async fn compress_image(img_buffer: Vec<u8>,quality: u8) -> compress_image::CompressResult {
@@ -20,13 +22,20 @@ fn get_dns() -> String {
     network::get_dns()
 }
 
+#[tauri::command]
+fn set_dns(servers: Vec<String>) -> Result<(), InvokeError> {
+    let _ = network::set_dns(servers);
+    Ok(())
+}
+
 fn main() {
     // use tauri::Manager;
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             compress_image,
             get_local_ip,
-            get_dns
+            get_dns,
+            set_dns
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
