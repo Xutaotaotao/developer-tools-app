@@ -3,5 +3,13 @@
   "Hello": "你好，",
   "Welcome to developer tools app": "欢迎使用developer tools app",
   "CompressImage": "压缩图片",
-  "Click or drag file to this area to compress": "点击或拖拽压缩图片"
+  "Click or drag file to this area to compress": "点击或拖拽压缩图片",
+  "Name":"名称",
+  "Size":"大小",
+  "Compress status":"压缩状态",
+  "Compress size":"压缩后的大小",
+  "Compress proportion":"压缩比例",
+  "Action":"操作",
+  "Download":"下载",
+  "NetWorkTools":"网络工具"
 }

@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import type { MenuProps } from "antd";
-import { Avatar, Button, Layout, Menu, Space, Typography, theme } from "antd";
+import {Button, Layout, Menu, Space, theme } from "antd";
 import { Link, useLocation, useOutlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Icon, { TranslationOutlined } from "@ant-design/icons";
@@ -16,7 +16,6 @@ import i18n from "../locales";
 import { menus } from "../menu";
 
 const { Header, Content, Sider } = Layout;
-const { Text } = Typography;
 
 const Root: React.FC = () => {
   const {
@@ -30,22 +29,10 @@ const Root: React.FC = () => {
   const forceUpdate = useReducer((bool: any) => !bool, true)[1];
   const [currentLang, setCurrentLang] = useState<string>("zh");
   const { changeTheme, themeData } = useContext(GlobalContext);
-  const [collapsed, setCollapsed] = useState(false);
 
   const menuOnSelect: MenuProps["onSelect"] = (a) => {
     setCurrentMenuKey(a.key);
   };
-
-  const currentMenuName = (key?: string) => {
-    const item = menus.find((menu) => menu.path === key);
-    if (item?.name) {
-      return t(item?.name);
-    } else {
-      return "Electron Prokit";
-    }
-  };
-
-  
 
   const changeLang = (lang?: string) => {
     if (lang) {

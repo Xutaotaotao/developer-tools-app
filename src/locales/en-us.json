@@ -3,5 +3,13 @@
   "Hello": "Hello，",
   "Welcome to developer tools app": "Welcome to developer tools app",
   "CompressImage": "CompressImage",
-  "Click or drag file to this area to compress": "Click or drag file to this area to compress"
+  "Click or drag file to this area to compress": "Click or drag file to this area to compress",
+  "Name":"Name",
+  "Size":"Size",
+  "Compress status":"Compress status",
+  "Compress size":"Compress size",
+  "Compress proportion":"Compress proportion",
+  "Action":"Action",
+  "Download":"Download",
+  "NetWorkTools":"NetWorkTools"
 }

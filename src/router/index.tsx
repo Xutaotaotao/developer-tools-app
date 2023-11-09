@@ -5,6 +5,7 @@ import Root from "../layout";
 import ErrorPage from "../pages/error-page";
 import Home from "../pages/home";
 import CompressImage from '../pages/compress-image'
+import NetWorkTools from '../pages/network'
 
  
 const router = createBrowserRouter([
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path:'CompressImage', element:<CompressImage />}
+      { path:'CompressImage', element:<CompressImage />},
+      { path:'NetWorkTools', element:<NetWorkTools />}
     ],
   },
 ]);
