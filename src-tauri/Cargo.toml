@@ -21,6 +21,7 @@ imageproc = "0.22"
 rayon = "1.8.0"
 photon-rs = "0.3.2"
 threadpool = "1.8"
+num_cpus = "1.14.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

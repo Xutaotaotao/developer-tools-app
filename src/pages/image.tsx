@@ -13,26 +13,6 @@ interface FileItem extends UploadFile {
   originImgBuffer: ArrayBuffer;
 }
 
-const items: MenuProps['items'] = [
-  {
-    label: 'Channel',
-    key: 'Channel',
-    children: [
-      {
-        label: 'AlterRedChannel',
-        key: 'alter_red_channel',
-      },
-      {
-        label: 'AlterGreenChannel',
-        key: 'alter_green_channel',
-      },
-      {
-        label: 'AlterBlueChannel',
-        key: 'alter_blue_channel',
-      }
-    ]
-  },
-];
 
 const Image = () => {
   const { t } = useTranslation();
@@ -40,6 +20,26 @@ const Image = () => {
   const [originalImage, setOriginalImage] = useState("");
   const [dealedImage,setDealedImage] = useState('')
   const [current, setCurrent] = useState('');
+  const items: MenuProps['items'] = [
+    {
+      label: t('Channel'),
+      key: 'Channel',
+      children: [
+        {
+          label: 'AlterRedChannel',
+          key: 'alter_red_channel',
+        },
+        {
+          label: 'AlterGreenChannel',
+          key: 'alter_green_channel',
+        },
+        {
+          label: 'AlterBlueChannel',
+          key: 'alter_blue_channel',
+        }
+      ]
+    },
+  ];
   const fileToArrayBuffer = (file: File): Promise<ArrayBuffer | undefined> => {
     return new Promise((resolve) => {
       let reader = new FileReader();
@@ -108,7 +108,7 @@ const Image = () => {
       </Dragger>
       <Row gutter={16}>
         <Col span={6}>
-          <Menu mode="inline" openKeys={['Channel']} onClick={onClick} selectedKeys={[current]} items={items} />
+          <Menu disabled={!fileList.length} mode="inline" openKeys={['Channel']} onClick={onClick} selectedKeys={[current]} items={items} />
         </Col>
         <Col span={18}>
           <Row gutter={16} style={{ marginTop: 15 }}>
