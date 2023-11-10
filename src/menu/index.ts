@@ -13,5 +13,5 @@ export const menus:Array<Menu> = [
   {path:'/',icon: HomeOutlined,name:'home' },
   // {path:'/CompressImage',icon: FileZipOutlined,name:'CompressImage' },
   {path: '/Image',icon:FileImageOutlined,name:'Image'},
-  {path:'/NetWorkTools',icon: GlobalOutlined,name:'NetWorkTools' },
+  {path:'/NetWorkTools',icon: GlobalOutlined,name:'NetWork' },
 ]

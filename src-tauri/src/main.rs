@@ -1,16 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod compress_image;
 mod network;
+mod image;
 
 use tauri::InvokeError;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-async fn compress_image(img_buffer: Vec<u8>,quality: u8) -> compress_image::CompressResult {
-    compress_image::compress_image(img_buffer,quality)
-}
 
 #[tauri::command]
 fn get_local_ip() -> Option<String> {
@@ -23,19 +19,23 @@ fn get_dns() -> String {
 }
 
 #[tauri::command]
-fn set_dns(servers: Vec<String>) -> Result<(), InvokeError> {
+async fn set_dns(servers: Vec<String>) -> Result<(), InvokeError> {
     let _ = network::set_dns(servers);
     Ok(())
 }
 
+#[tauri::command(async)]
+fn photo_channel(pixels: Vec<u8>,method:&str) -> String {
+    image::photo_channel(pixels,method)
+}
+
 fn main() {
-    // use tauri::Manager;
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
-            compress_image,
             get_local_ip,
             get_dns,
-            set_dns
+            set_dns,
+            photo_channel
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
