@@ -2,7 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod network;
-mod image;
 
 use tauri::InvokeError;
 
@@ -24,10 +23,6 @@ async fn set_dns(servers: Vec<String>) -> Result<(), InvokeError> {
     Ok(())
 }
 
-#[tauri::command(async)]
-fn photo_channel(pixels: Vec<u8>,method:&str) -> String {
-    image::photo_channel(pixels,method)
-}
 
 fn main() {
     tauri::Builder::default()
@@ -35,7 +30,6 @@ fn main() {
             get_local_ip,
             get_dns,
             set_dns,
-            photo_channel
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

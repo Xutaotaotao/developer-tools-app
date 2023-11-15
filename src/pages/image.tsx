@@ -1,7 +1,7 @@
-import { Card, Upload, Row, Col, Menu, Button } from "antd";
+import { Card, Upload, Row, Col, Menu, Button, Space } from "antd";
 import { useTranslation } from "react-i18next";
 import type { MenuProps, UploadFile } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import { InboxOutlined, DownloadOutlined,ReloadOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import { writeBinaryFile } from "@tauri-apps/api/fs";
 import { path, dialog } from "@tauri-apps/api";
@@ -65,6 +65,25 @@ const Image = () => {
     }
   };
 
+  const resetImg = () => {
+    setCurrent('')
+    const file = fileList[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file.originFileObj);
+    const img: any = document.createElement("img");
+    reader.onload = function (e: any) {
+      setCurrentImg(img);
+      img.src = e.target.result;
+    };
+    img.onload = function () {
+      const canvas: any = canvasRef.current;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+    };
+  };
+
   const filesChange = (info: any) => {
     const hasFile = fileList.find(
       (file: FileItem) => info.file.name === file.name
@@ -106,11 +125,11 @@ const Image = () => {
   };
 
   const applyEffect = async (code: string) => {
-    const canvas1: any = canvasRef.current;
-    const ctx = canvas1.getContext("2d");
+    const canvas: any = canvasRef.current;
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(currentImg, 0, 0);
     let module = wasm;
-    let rust_image = module.open_image(canvas1, ctx);
+    let rust_image = module.open_image(canvas, ctx);
 
     let filter_dict: any = {
       grayscale: function () {
@@ -340,7 +359,7 @@ const Image = () => {
       },
     };
     filter_dict[code]();
-    module.putImageData(canvas1, ctx, rust_image);
+    module.putImageData(canvas, ctx, rust_image);
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
@@ -365,10 +384,10 @@ const Image = () => {
   };
 
   useEffect(() => {
-    if (current) {
+    if (current && fileList.length && currentImg) {
       applyEffect(current);
     }
-  }, [current]);
+  }, [current, fileList, currentImg]);
 
   useEffect(() => {
     loadWasm();
@@ -376,22 +395,54 @@ const Image = () => {
 
   return (
     <Card className="layout-card">
-      <Dragger
-        name="file"
-        multiple
-        onChange={filesChange}
-        fileList={fileList}
-        customRequest={() => {}}
-        showUploadList={false}
-      >
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">
-          {t("Click or drag file to this area to upload")}
-        </p>
-      </Dragger>
       <Row gutter={16}>
+        <Col span={20}>
+          <Dragger
+            name="file"
+            multiple
+            onChange={filesChange}
+            fileList={fileList}
+            customRequest={() => {}}
+            showUploadList={false}
+          >
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">
+              {t("Click or drag file to this area to upload")}
+            </p>
+          </Dragger>
+        </Col>
+        <Col span={4}>
+          <Space direction="vertical">
+            <div>
+              <Button
+                disabled={fileList.length === 0}
+                style={{ width: "100%" }}
+                size="large"
+                icon={<ReloadOutlined />}
+                onClick={() => resetImg()}
+              >
+                Reset
+              </Button>
+            </div>
+            <div>
+              <Button
+                disabled={fileList.length === 0}
+                style={{ width: "100%" }}
+                size="large"
+                icon={<DownloadOutlined />}
+                type="primary"
+                onClick={() => handleSaveFile()}
+              >
+                Download
+              </Button>
+            </div>
+          </Space>
+        </Col>
+      </Row>
+
+      <Row gutter={16} style={{ marginTop: "5px" }}>
         <Col span={6}>
           <Menu
             disabled={!fileList.length}
@@ -406,7 +457,6 @@ const Image = () => {
           <canvas style={{ width: "100%", height: "100%" }} ref={canvasRef} />
         </Col>
       </Row>
-      <Button onClick={() => handleSaveFile()}>保存</Button>
     </Card>
   );
 };
