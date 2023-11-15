@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@silvia-odwyer/photon": "^0.3.2",
     "@tauri-apps/api": "^1.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -24,6 +25,7 @@
     "react-i18next": "^13.3.1",
     "react-router-dom": "^6.18.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.4"
+    "vite": "^4.4.4",
+    "vite-plugin-wasm": "^3.2.2"
   }
 }

@@ -637,6 +637,7 @@ version = "0.0.0"
 dependencies = [
  "image 0.23.14",
  "imageproc",
+ "lazy_static",
  "num_cpus",
  "photon-rs",
  "rayon",

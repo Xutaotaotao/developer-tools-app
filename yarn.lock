@@ -490,6 +490,11 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.11.0.tgz#e0e45ac3fff9d8a126916f166809825537e9f955"
   integrity sha512-BHdhcWgeiudl91HvVa2wxqZjSHbheSgIiDvxrF1VjFzBzpTtuDPkOdOi3Iqvc08kXtFkLjhbS+ML9aM8mJS+wQ==
 
+"@silvia-odwyer/photon@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@silvia-odwyer/photon/-/photon-0.3.2.tgz#44427d643599cad9dbde5d8c0564763b9fa2a26c"
+  integrity sha512-1h5MFDyu4WYQwbFYtHcAl4FWxEZncgdo/tQFmrsiIiIglRt4R+VTiRrplDS+kCofEaafjXkwdXP1fRwh/pgA5A==
+
 "@tauri-apps/api@^1.5.0":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.5.1.tgz#9074476c4323f71351db624e9711c99277cdfb99"
@@ -1406,6 +1411,11 @@ update-browserslist-db@^1.0.13:
   dependencies:
     escalade "^3.1.1"
     picocolors "^1.0.0"
+
+vite-plugin-wasm@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-wasm/-/vite-plugin-wasm-3.2.2.tgz#7a66fef27733a0dea9b2b14f942a6389a2523f7c"
+  integrity sha512-cdbBUNR850AEoMd5nvLmnyeq63CSfoP1ctD/L2vLk/5+wsgAPlAVAzUK5nGKWO/jtehNlrSSHLteN+gFQw7VOA==
 
 vite@^4.4.4:
   version "4.5.0"
